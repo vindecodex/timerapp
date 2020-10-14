@@ -7,6 +7,7 @@ const input = $("#input");
 const start = $("#start");
 let minutes = 0;
 let seconds = 0;
+let started = false;
 
 function startTimer() {
   let interval = setInterval(function() {
@@ -15,8 +16,10 @@ function startTimer() {
     if (minutes == 0 && seconds == 0) {
       clearInterval(interval);
       alert("WEEEE");
+      started = false;
     }
     calculateSeconds(seconds);
+    console.log(seconds,minutes);
   }, 1000)
 
   return interval;
@@ -36,28 +39,32 @@ function calculateSeconds(_seconds) {
 function displayTime() {
   if (minutes < 10 && seconds < 10)
     return `0${minutes}:0${seconds}`;
+  if (minutes == 0 && seconds < 10)
+    return `00:0${seconds}`;
+  if (minutes == 0 && seconds == 0)
+    return `00:00`;
   if (minutes < 10)
     return `0${minutes}:${seconds}`;
   if (seconds < 10)
     return `${minutes}:0${seconds}`;
   if (minutes == 0)
     return `00:${seconds}`;
-  if (minutes == 0 && seconds < 10)
-    return `00:0${seconds}`;
-  if (minutes == 0 && seconds == 0)
-    return `00:00`;
+  return `${minutes}:${seconds}`;
 }
 
 start.addEventListener("click", function() {
   try {
-    seconds = parseInt(input.value);
-    alert(seconds);
-    if (seconds < 1 || typeof seconds != "number") {
-      alert("Invalid number")
-      return;
+    if (!started) {
+      seconds = parseInt(input.value);
+      alert(seconds);
+      if (seconds < 1 || typeof seconds != "number") {
+        alert("Invalid number")
+        return;
+      }
+      input.value = "";
+      startTimer();
+      started = true;
     }
-    input.value = "";
-    startTimer();
   } catch (e) {
     console.log(e);
   }
