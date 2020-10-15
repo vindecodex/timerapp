@@ -15,11 +15,10 @@ function startTimer() {
     timer.innerHTML = displayTime();
     if (minutes == 0 && seconds == 0) {
       clearInterval(interval);
-      alert("WEEEE");
+      alert("Time is Up!");
       started = false;
     }
     calculateSeconds(seconds);
-    console.log(seconds,minutes);
   }, 1000)
 
   return interval;
