@@ -55,7 +55,6 @@ start.addEventListener("click", function() {
   try {
     if (!started) {
       seconds = parseInt(input.value);
-      alert(seconds);
       if (seconds < 1 || typeof seconds != "number") {
         alert("Invalid number")
         return;
