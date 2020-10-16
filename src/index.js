@@ -29,7 +29,7 @@ function calculateSeconds(_seconds) {
     minutes = Math.floor(_seconds / 60);
     seconds = _seconds - (minutes * 60);
   }
-  if (seconds == 0) {
+  if (seconds == 0 && started) {
     seconds = 60;
     minutes--;
   }
